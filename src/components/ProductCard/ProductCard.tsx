@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import { HttpStatusCode } from "axios";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/actions/cartActions";
 import "./ProductCard.css";
+import { addToCart } from "../../store/reducers/cartReducer";
 
 type Props = {
 	product: ProductModel;
@@ -16,7 +16,7 @@ const ProductCard = (props: Props) => {
 	const deleteProduct = async () => {
 		try {
 			let response = await ProductService.delete(250);
-			if (response.status == HttpStatusCode.Ok) {
+			if (response.status === HttpStatusCode.Ok) {
 				props.onDelete(props.product.id);
 				alert("Veri başarıyla silindi.");
 			}
